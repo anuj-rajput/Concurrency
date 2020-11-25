@@ -10,7 +10,7 @@ When running a task synchronously, the app will wait and block the current run l
 
 In general, you'll want to take any long-running non-UI task that you can find and make it run asynchronously in the background.
 
-```
+```swift
 // Class level variable
 let queue = DispatchQueue(label: "com.anujrajput.worker")
 
