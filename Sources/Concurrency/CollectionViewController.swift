@@ -96,7 +96,7 @@ extension CollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "normal", for: indexPath) as! PhotoCell
         
         cell.display(image: nil)
-        downloadWithGlobalQueue(at: indexPath)
+        downloadWithUrlSession(at: indexPath)
         
         return cell
     }
