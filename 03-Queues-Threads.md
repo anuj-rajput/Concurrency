@@ -51,3 +51,28 @@ For the tasks user is not directly aware of, you should use the `.background` qu
 
 #### .default and .unspecified
 This exists between `.userInitiated` and `.utility` and should not be specified directly.
+
+### Inferring QoS
+You can tell teh system what the QoS is via its initializer:
+```swift
+let queue = DispatchQueue(label: label, qos: .userInitiated, attributes: .concurrent)
+```
+If you submit a task with higher quality of service than the queue has, the queue's level will increase. Not only that, but all the operations enqueued will also have their priority raised as well.
+
+### Adding task to queues
+Dispatch queues provide both `sync` and `async` methods to add a task to a queue. By *task*, "Whatever block of code you need to run".
+```swift
+DispatchQueue.global(qos: .utility).async { [weak self] in 
+    guard let self = self else { return }
+    
+    // Perform your work here
+    // ...
+    
+    // Switch back to the main queue to
+    // update the UI
+    DispatchQueue.main.async {
+        self.textLabel.text = "New articles available!"
+    }
+}
+```
+Strongly capturing `self` in a GCD `async` closure will not cause a reference cycle (e.g. a retain cycle) since the whole closure will be deallocated once it's completed, but it will extend the lifetime of `self`.
