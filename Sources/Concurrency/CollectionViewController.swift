@@ -67,6 +67,23 @@ final class CollectionViewController: UICollectionViewController {
             }
         }
     }
+    
+    // Many standard iOS libraries will handle dispatching tasks on to queues
+    private func downloadWithUrlSession(at indexPath: IndexPath) {
+        URLSession.shared.dataTask(with: urls[indexPath.item]) { [weak self] data, response, error in
+            guard let self = self,
+                  let data = data,
+                  let image = UIImage(data: data) else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                if let cell = self.collectionView.cellForItem(at: indexPath) as? PhotoCell {
+                    cell.display(image: image)
+                }
+            }
+        }.resume()
+    }
 }
 
 // MARK: - Data source
