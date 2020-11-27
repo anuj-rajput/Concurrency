@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,9 +45,9 @@
 				D2A5F2021F4A9144005CD714 /* Concurrency */,
 				D2A5F2011F4A9144005CD714 /* Products */,
 			);
-			indentWidth = 2;
+			indentWidth = 4;
 			sourceTree = "<group>";
-			tabWidth = 2;
+			tabWidth = 4;
 		};
 		D2A5F2011F4A9144005CD714 /* Products */ = {
 			isa = PBXGroup;
@@ -100,7 +100,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 1200;
-				ORGANIZATIONNAME = "Ray Wenderlich";
+				ORGANIZATIONNAME = "Anuj Rajput";
 				TargetAttributes = {
 					D2A5F1FF1F4A9144005CD714 = {
 						CreatedOnToolsVersion = 9.0;
@@ -114,7 +114,7 @@
 				};
 			};
 			buildConfigurationList = D2A5F1FB1F4A9143005CD714 /* Build configuration list for PBXProject "Concurrency" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
