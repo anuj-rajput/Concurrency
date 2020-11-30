@@ -85,3 +85,12 @@ By using a `DispatchSemaphore`, you can handle exactly that use case
 When creating a semaphore, you specify how many concurrent accesses to the resource are allowed. If you wish to enable four network downloads at once, then you pass in 4. If you're trying to lock a resource for exclusive access, then you'd just specify 1.
 
 Just as you had to be sure to call leave on a dispatch group, you'll want to be sure to `signal` when you're done using the resource. Using a `defer` block is the best option as there's then no way to leave without letting go of the resource
+
+You need to use both elements because the semaphore controls access to the resource, and the dispatch group is how you are tracking completion
+
+Think of the semaphore itself as being some type of resource. If you have three hammers and four saws available, you'd want to create two semaphores to represent them:
+
+```swift
+let hammer = DispatchSemaphore(value: 3)
+let saw = DispatchSemaphore(value: 4)
+```

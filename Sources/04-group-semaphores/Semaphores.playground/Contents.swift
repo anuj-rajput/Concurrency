@@ -38,23 +38,56 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 
 let group = DispatchGroup()
 let queue = DispatchQueue.global(qos: .userInteractive)
-let semaphore = DispatchSemaphore(value: 4)
+let semaphore = DispatchSemaphore(value: 2)
 
-for i in 1...10 {
-    queue.async(group: group) {
-        semaphore.wait()
-        defer { semaphore.signal() }
+//for i in 1...10 {
+//    queue.async(group: group) {
+//        semaphore.wait()
+//        defer { semaphore.signal() }
+//
+//        print("Downloading image \(i)")
+//
+//        // Simulate a network wait
+//        Thread.sleep(forTimeInterval: 3)
+//
+//        print("Downloaded image \(i)")
+//    }
+//}
+//
+//// Because we've not specified a time, this will wait indefinitely
+//group.wait()
+//
+//PlaygroundPage.current.finishExecution()
+
+let base = "https://wolverine.raywenderlich.com/books/con/image-from-rawpixel-id-"
+let ids = [ 466881, 466910, 466925, 466931, 466978, 467028, 467032, 467042, 467052 ]
+
+var images: [UIImage] = []
+
+for id in ids {
+    guard let url = URL(string: "\(base)\(id)-jpeg.jpg") else { continue }
+    
+    semaphore.wait()
+    group.enter()
+    
+    let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
+        defer {
+            group.leave()
+            semaphore.signal()
+        }
         
-        print("Downloading image \(i)")
-        
-        // Simulate a network wait
-        Thread.sleep(forTimeInterval: 3)
-        
-        print("Downloaded image \(i)")
+        if error == nil,
+           let data = data,
+           let image = UIImage(data: data) {
+            images.append(image)
+        }
     }
+    
+    task.resume()
 }
 
-// Because we've not specified a time, this will wait indefinitely
-group.wait()
-
-PlaygroundPage.current.finishExecution()
+group.notify(queue: queue) {
+    images[0]
+    
+    PlaygroundPage.current.finishExecution()
+}
