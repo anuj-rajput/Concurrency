@@ -74,3 +74,12 @@ func myAsyncAddForGroups(group: DispatchGroup, lhs: Int, rhs: Int, completion: @
 ```
 The wrapper method takes a parameter for the group that it will count against, and then the rest of the arguments should be exactly the same as that of the method you're wrapping.
 If you write a wrapper method, then testing iis simplified to a single location to validate proper pairing of `enter` and `leave` calls.
+
+
+## Semaphores
+There are times when you really need to control how many threads have access to a shared resource.
+If you're downloading data from the network, for example, you may wish to limit how many downloads happen at once. You'll use a dispatch queue to offload the work, and you'll use dispatch groups so that you know when all the downloads have completed. However, you only want to allow four downloads to happen at once because you know the data you're getting is quite large and resource-heavy to process.
+
+By using a `DispatchSemaphore`, you can handle exactly that use case
+
+When creating a semaphore, you specify how many concurrent accesses to the resource are allowed. If you wish to enable four network downloads at once, then you pass in 4. If you're trying to lock a resource for exclusive access, then you'd just specify 1.
