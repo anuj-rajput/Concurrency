@@ -26,3 +26,26 @@ public var count: Int {
     }
 }
 ```
+
+### Thread barrier
+Sometimes, your shared resource requires more complex logic in its getters and setters than a simple variable modification. Locking is very hard to implement properly. Instead, you can use Apple's *dispatch barrier* from GCD.
+
+If you create  a concurrent queue, you can process as many read type tasks as you want as they can all run at the same time. WHen the variable needs to be written to, then you need to lock down the queue so that everything already submitted completes, but no new submissions are run until the update completes.
+
+Creating a dispatch barrier:
+```swift
+private let threadSafeCountQueue = DispatchQueue(label: "countQueue", attributes: .concurrent)
+private var _count = 0
+public var count: Int {
+    get {
+        return threadSafeCountQueue.sync {
+            return _count
+        }
+    }
+    set {
+        threadSafeCountQueue.async(flags: .barrier) { [unowned self] in 
+            self._count = newValue
+        }
+    }
+}
+```
