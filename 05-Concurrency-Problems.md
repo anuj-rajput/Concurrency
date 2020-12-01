@@ -49,3 +49,15 @@ public var count: Int {
     }
 }
 ```
+
+## Deadlock
+Accidentally calling `sync` against the current dispatch queue is the most common occurrence of deadlocks.
+
+If you're using semaphores to control access to multiple resources, be sure that you ask for resources in the same order. If thread 1 requests a hammer and then a saw, whereas thread 2 requests a saw and a hammer, you can deadlock. Thread 1 requests and receives hammer at the same time thread 2 requests and receives a saw. Then thread 1 asks for a saw - without releasing the hammer - but thread 2 owns the resource so thread 1 must wait. Thread 2 asks for a saw, but thread 1 still owns the resource, so thread 2 must wait for the saw to become available. Both threads are now in deadlock as neither can progress until their requested resources are freed, which will never happen.
+
+## Priority inversion
+Priority inversion occurs when a queue with a lower quality of service is given higher system priority than a queue with a higher quality of service, or QoS.
+
+If you are using a `.userInitiated` queue and a `.utility` queue and you submit multiple tasks to the latter queue with a `.userInteractive` quality of service, you could end up in a situation in which the latter queue is assigned a higher priority and all the other tasks in the queue, most of which are `.utility` quality of service will end up runnign before the tasks from `.userInitiated` queue. To avoid this: If you need a higher quality of service, use a different queue.   
+
+The common situation when priority inversion occurs is when a higher quality of service queue shares a resource with a lower quality of service queue. When the lower queue gets a lock on the object, the higher queue now has to wait. Until the lock is released, the high priority queue is effectively stuck doing nothing while low priority tasks run.
