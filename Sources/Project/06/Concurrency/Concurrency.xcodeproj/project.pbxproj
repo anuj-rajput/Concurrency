@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28900440257790D900CEE329 /* TiltShiftOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2890043F257790D900CEE329 /* TiltShiftOperation.swift */; };
 		5394F02521864DF5006E754C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5394F02321864DF4006E754C /* LaunchScreen.storyboard */; };
 		D27437502211DC9F00B1E02F /* TiltShiftTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D274374F2211DC9F00B1E02F /* TiltShiftTableViewController.swift */; };
 		D27437522211DFBB00B1E02F /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27437512211DFBB00B1E02F /* PhotoCell.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2890043F257790D900CEE329 /* TiltShiftOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltShiftOperation.swift; sourceTree = "<group>"; };
 		5394F02421864DF4006E754C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D274374F2211DC9F00B1E02F /* TiltShiftTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltShiftTableViewController.swift; sourceTree = "<group>"; };
 		D27437512211DFBB00B1E02F /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				D27437512211DFBB00B1E02F /* PhotoCell.swift */,
 				D2CC8F0E220890C50025B523 /* TiltShiftFilter.swift */,
 				D274374F2211DC9F00B1E02F /* TiltShiftTableViewController.swift */,
+				2890043F257790D900CEE329 /* TiltShiftOperation.swift */,
 			);
 			path = Concurrency;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				D2CC8F0F220890C50025B523 /* TiltShiftFilter.swift in Sources */,
 				D2CC8F11220C93EF0025B523 /* ExampleViewController.swift in Sources */,
 				D27437502211DC9F00B1E02F /* TiltShiftTableViewController.swift in Sources */,
+				28900440257790D900CEE329 /* TiltShiftOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
