@@ -12,6 +12,8 @@ An operation has a state machine tthat represents its lifecycle.
 - If the app calls the `cancel` method, then it will transition to the `isCancelled` state before moving onto the `isFinished` state.
 - If it's not canceled, then it will move directly from `isExecutting` to `isFinished`
 
+![Operation States](/images/OperationStates.png)
+
 Each of the states are read-only boolean properties on `Operation` class and you can query them at any point during the execution of the task to see whether or not the task is executing.
 
 ## BlockOperation
