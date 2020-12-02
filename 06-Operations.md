@@ -25,4 +25,7 @@ let operation = BlockOperation {
 Being an `Operation`, it can take advantage of KVO (Key-Value Observing) notifications, dependencies and everything else that an `Operation` provides.
 
 ### Multiple block operations
+When you want to add additional closures to the `BlockOperation`, you'll call the `addExecutionBlock` method and simply pass in a new closure. Use that method to print out a public service announcement, one word at a time
 
+## Subclassing operation
+The `BlockOperation` class is great for simple tasks but if performing more complex work, or for reusable components, you'll want to subclass `Operation` yourself.
