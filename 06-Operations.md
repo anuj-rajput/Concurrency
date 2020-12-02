@@ -12,7 +12,6 @@ An operation has a state machine tthat represents its lifecycle.
 - If the app calls the `cancel` method, then it will transition to the `isCancelled` state before moving onto the `isFinished` state.
 - If it's not canceled, then it will move directly from `isExecutting` to `isFinished`
 
-===
-                                                          ↗  isCancelled
+                                  ↗  isCancelled
 Operation → isReady → isExecuting              ↓
                                                           ↘  isFinished
