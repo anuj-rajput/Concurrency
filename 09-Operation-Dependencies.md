@@ -59,3 +59,31 @@ However, if you start seeing loops, you've almost certainly run into a deadlock.
 - Operation 2 can't start until operation 5 is done.
 - Operation 5 can't start until operation 3 is done.
 - Operation 3 can't start until operation 2 is done.
+
+If you start and end with the same operation number in a cycle, you've hit deadlock. None of the operations will ever be executed.
+
+## Passing data between operations
+### Using protocols
+```swift
+import UIKit
+protocol ImageDataProvider {
+    var image: UIImage? { get }
+}
+```
+
+### Adding extensions
+While you could have simply added ImageDataProvider to the class definition, the Swift Style Guide recommends the extension approach instead.
+
+```swift
+extension NetworkImageOperation: ImageDataProvider {}
+````
+
+```swift
+extension TiltShiftOperation: ImageDataProvider {
+    var image: UIImage? { return outputImage }
+}
+```
+
+Remember that an extension can be placed anywhere, in any file. Since you created both operations, it makes sense of course to place the extension right alongside the class.
+
+### Searching for the protocol
