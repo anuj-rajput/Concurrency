@@ -34,6 +34,9 @@ final class TiltShiftOperation: Operation {
   var outputImage: UIImage?
 
   private let inputImage: UIImage?
+  
+  /// Callback which will be run *on the main thread* when the operation completes.
+  var onImageProcessed: ((UIImage?) -> Void)?
 
   init(image: UIImage? = nil) {
     inputImage = image
@@ -63,6 +66,12 @@ final class TiltShiftOperation: Operation {
     }
     
     outputImage = UIImage(cgImage: rendered)
+    
+    if let onImageProcessed = onImageProcessed {
+      DispatchQueue.main.async { [weak self] in
+        onImageProcessed(self?.outputImage)
+      }
+    }
   }
 }
 
