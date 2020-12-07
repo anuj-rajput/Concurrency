@@ -54,18 +54,22 @@ class TiltShiftTableViewController: UITableViewController {
     let cell = tableView.dequeueReusableCell(withIdentifier: "normal", for: indexPath) as! PhotoCell
     cell.display(image: nil)
     
-    let op = NetworkImageOperation(url: urls[indexPath.row])
-    op.completionBlock = {
+    let downloadOp = NetworkImageOperation(url: urls[indexPath.row])
+    let tiltShiftOp = TiltShiftOperation()
+    tiltShiftOp.addDependency(downloadOp)
+    
+    tiltShiftOp.completionBlock = {
       DispatchQueue.main.async {
         guard let cell = tableView.cellForRow(at: indexPath) as? PhotoCell else { return }
 
         cell.isLoading = false
 
-        cell.display(image: op.image)
+        cell.display(image: tiltShiftOp.image)
       }
     }
 
-    queue.addOperation(op)
+    queue.addOperation(downloadOp)
+    queue.addOperation(tiltShiftOp)
 
     return cell
   }
