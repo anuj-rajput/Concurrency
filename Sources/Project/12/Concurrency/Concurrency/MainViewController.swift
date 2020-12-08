@@ -37,7 +37,7 @@ final class MainViewController: UIViewController {
     let queue = DispatchQueue(label: "q")
     queue.async {
       for _ in 1 ... 10000 {
-        Thread.sleep(forTimeInterval: 0.1)
+        //Thread.sleep(forTimeInterval: 0.1)
         self.counter += 1
       }
     }
