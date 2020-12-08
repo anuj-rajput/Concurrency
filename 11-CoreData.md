@@ -81,3 +81,5 @@ DispatchQueue.main.async { [weak self] in
     self.addressLabel.text = myEntity.address
 }
 ```
+### Using ConcurrencyDebug
+Add `-com.apple.CoreData.ConcurrencyDebug 1` to your app's scheme to catch calling Core Data methods on the wrong thread in the debugger.
