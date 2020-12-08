@@ -30,7 +30,7 @@ import UIKit
 import CoreData
 
 final class MainViewController: UIViewController {
-  private let passActualObject = true
+  private let passActualObject = false
 
   @IBOutlet private weak var textField: UITextField!
   @IBOutlet private weak var progressView: UIProgressView!
